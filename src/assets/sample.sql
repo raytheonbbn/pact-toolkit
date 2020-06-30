@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS experiments(id INTEGER PRIMARY KEY AUTOINCREMENT,data TEXT);
+
+INSERT or IGNORE INTO experiments VALUES (1, '{"key":"exp50","experimentUUID":"93a460f7-d711-48db-9cb6-2c028b7aa877","title":"Experiment with Phone in Pocket","timestamp":"2020-06-10T00:13:40.121Z","device":{"version":"9","model":"Pixel 2","manufacturer":"Google","id":"1ea2b1ec9a180379","serial":"unknown"},"distance":null,"orientation1":null,"orientation2":null,"location":{"latitude":42.3992604,"longitude":-71.1306655,"accuracy":3.9000000953674316,"altitude":-7.24066162109375,"altitudeAccuracy":null,"heading":null,"speed":0,"timestamp":1591748016442,"address":""},"note":"","completed":false,"data":[]}');

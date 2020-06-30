@@ -1,0 +1,38 @@
+<!-- 
+  Copyright © 2020, Raytheon BBN Technologies. All rights reserved.
+  See LICENSE.md in top level directory for additional information
+ -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Record BLE Data
+    </ion-title>
+    <ion-item *ngIf="advertising" slot="end">
+      Advertising
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let device of devices">
+      <ion-label>
+          <pre>{{device | json}}</pre>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button color="danger" (click)="navigateHome()" fill="outline">
+        Exit
+      </ion-button>
+    </ion-buttons>
+    <ion-item>
+      <ion-label>{{ statusMessage }}</ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

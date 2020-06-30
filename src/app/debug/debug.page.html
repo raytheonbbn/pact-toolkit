@@ -1,0 +1,35 @@
+<!-- 
+  Copyright © 2020, Raytheon BBN Technologies. All rights reserved.
+  See LICENSE.md in top level directory for additional information
+ -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Debug Tools</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-note>This screen should not be used in production environments</ion-note>
+  <h5>Debugging</h5>
+  <p>When advertisements are initialized with the green button below, you should be able to identify this device on a
+    BLE scanner. The UUID displayed below will match the service identifier included in this BLE advertisement.</p>
+  <ion-item-divider>
+    <ion-label>
+      BLE Peripheral
+    </ion-label>
+  </ion-item-divider>
+  <ion-button color="success" expand="block" (click)="initializeBLE()">Begin Advertising</ion-button>
+  <ion-button color="warning" expand="block" [disabled]="!advertising" (click)="stopAdvertising()">Stop Advertising
+  </ion-button>
+  <ion-button color="secondary" expand="block" (click)="checkAdvertising()">Check Status</ion-button>
+  <ion-item-divider></ion-item-divider>
+  <ion-item>
+    <p>
+      {{ advertisingInfo }}
+    </p>
+  </ion-item>
+</ion-content>

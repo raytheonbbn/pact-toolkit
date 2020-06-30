@@ -1,0 +1,95 @@
+<!-- 
+  Copyright © 2020, Raytheon BBN Technologies. All rights reserved.
+  See LICENSE.md in top level directory for additional information
+ -->
+
+<ion-menu side="start" content-id="main-content">
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="flask-outline" slot="start"></ion-icon>
+        <ion-label>Experiments</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="settings" slot="start"></ion-icon>
+        <ion-label>Configure</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="school" slot="start"></ion-icon>
+        <ion-label>Tutorial</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/about']" routerDirection="forward">
+        <ion-icon name="help" slot="start"></ion-icon>
+        <ion-label>About</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/debug']" routerDirection="forward">
+        <ion-icon name="hammer" slot="start"></ion-icon>
+        <ion-label>Debug</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Experiments</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div *ngIf="experiments.length == 0" class="ion-text-center fullheight vertical-center">
+      <div>
+        <ion-note>
+          No experiments yet.<br>
+          Create one with the button below!
+        </ion-note>
+      </div>
+    </div>
+
+    <ion-list>
+      <ion-card *ngFor="let experiment of experiments">
+ 
+        <ion-item>
+          <ion-icon name="flask" slot="start"></ion-icon>
+          <ion-label>{{ experiment.title }}</ion-label>
+          <ion-button (click)="showExperiment(experiment.id)" fill="outline" slot="end">View</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+          <h2>Datetime</h2>
+          {{ experiment.timestamp | date: 'MM/dd/yyyy h:mm aa' }}
+          <h2>Location: </h2>
+          <p *ngIf="this.experiment.location != null">
+            {{ experiment.location.latitude + ', ' + experiment.location.longitude + " - Accuracy: " + experiment.location.accuracy}}</p>
+          <h2>Altitude: </h2>
+          <p *ngIf="this.experiment.location != null">
+            {{  experiment.location.altitude + ' meters' + ' - Accuracy: ' + experiment.location.altitudeAccuracy}}</p>
+          <ng-template #unknown>
+            <p>
+              unknown
+            </p>
+          </ng-template>
+        </ion-card-content>
+
+
+
+
+      </ion-card>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button [routerLink]="'/create-experiment/'" routerDirection="forward">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+</div>

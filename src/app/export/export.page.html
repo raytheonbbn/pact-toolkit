@@ -1,0 +1,60 @@
+<!-- 
+  Copyright © 2020, Raytheon BBN Technologies. All rights reserved.
+  See LICENSE.md in top level directory for additional information
+ -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Export Experiment Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <form>
+        <ion-item>
+          <ion-text>
+            <h2>Export Format</h2>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <p>
+            This experiment is stored on the device in JSON format. This can be exported and analyzed on its own,
+            or it can be exported in the MIT-LL JSON format. Select an option below.
+          </p>
+        </ion-item>
+        <ion-item>
+          <ion-select class="select-full-width"  interface="popover"  [ngModelOptions]="{standalone: true}" value="bbn" [(ngModel)]="exportOptions.format">
+            <ion-select-option value="bbn">Raw JSON Format</ion-select-option>
+            <ion-select-option value="mit">MIT-LL JSON Format</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-text>
+            <h2>Output Location</h2>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <p>
+            The experiment data can be stored on the device memory, or sent via email. Save this data to the device as a .json file, or send it be used by the PACT consortium.
+          </p>
+        </ion-item>
+        <ion-item>
+          <ion-select class="select-full-width" interface="popover" [ngModelOptions]="{standalone: true}" value="device" [(ngModel)]="exportOptions.target">
+            <ion-select-option value="device">Save to Device Storage</ion-select-option>
+            <ion-select-option value="email_pact">Email to PACT Data Collection</ion-select-option>
+            <ion-select-option value="email_custom">Email to Custom Recipient</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button color="primary" expand="block" (click)="exportData()" type="submit">Export</ion-button>
+      </form>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row class="ion-padding">
+    <ion-col text-center>
+      <ion-button color="danger" (click)="closeModal()">Cancel</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

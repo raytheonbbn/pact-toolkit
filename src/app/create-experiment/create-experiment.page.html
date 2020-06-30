@@ -1,0 +1,96 @@
+<!-- 
+  Copyright © 2020, Raytheon BBN Technologies. All rights reserved.
+  See LICENSE.md in top level directory for additional information
+ -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelCreate()">
+        <ion-icon slot="icon-only" ios="close" md="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create Experiment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Default Segment -->
+  <ion-segment (ionChange)="segmentChanged($event)" value="leader">
+    <ion-segment-button value="leader">
+      <ion-label>Leader</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="follower">
+      <ion-label>Follower</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="leader"  class="ion-padding">
+    <form (ngSubmit)="createExperimentBarcode()">
+      <ion-item>
+        <ion-label>Title</ion-label>
+        <ion-input [(ngModel)]="experimentInput.title" autocapitalize clearOnEdit type="text" placeholder="Leave blank for an automatic name"  name="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea [(ngModel)]="experimentInput.description" autocapitalize placeholder="A helpful description of your experiment" name="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Device Distance</ion-label>
+        <ion-input [(ngModel)]="experimentInput.distance" clearOnEdit type="number" placeholder="0" name="title"></ion-input> meters
+        <ion-button (click)="displayInputInfo('distance')" slot="end" fill="clear">
+          <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-list-header>
+        <ion-label>Orientation</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>This device</ion-label>
+        <ion-select [(ngModel)]="experimentInput.orientation1" [ngModelOptions]="{standalone: true}" cancelText="Cancel" okText="OK">
+          <ion-select-option value="0">0° (upright)</ion-select-option>
+          <ion-select-option value="45">45°</ion-select-option>
+          <ion-select-option value="90">90° (one turn right)</ion-select-option>
+          <ion-select-option value="135">135°</ion-select-option>
+          <ion-select-option value="180">180° (top down)</ion-select-option>
+          <ion-select-option value="225">225°</ion-select-option>
+          <ion-select-option value="270">270° (one turn left)</ion-select-option>
+          <ion-select-option value="315">315°</ion-select-option>
+        </ion-select>
+        <ion-button (click)="displayInputInfo('orientation1')" slot="end" fill="clear">
+          <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Other device</ion-label>
+        <ion-select [(ngModel)]="experimentInput.orientation2" [ngModelOptions]="{standalone: true}"  cancelText="Cancel" okText="OK">
+          <ion-select-option value="0">0° (upright)</ion-select-option>
+          <ion-select-option value="45">45°</ion-select-option>
+          <ion-select-option value="90">90° (one turn right)</ion-select-option>
+          <ion-select-option value="135">135°</ion-select-option>
+          <ion-select-option value="180">180° (top down)</ion-select-option>
+          <ion-select-option value="225">225°</ion-select-option>
+          <ion-select-option value="270">270° (one turn left)</ion-select-option>
+          <ion-select-option value="315">315°</ion-select-option>
+        </ion-select>
+        <ion-button (click)="displayInputInfo('orientation2')" slot="end" fill="clear">
+          <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-button color="primary" expand="block" type="submit">Next</ion-button>
+    </form> 
+    <div *ngIf="toEncode != null">
+      Scan the QR code below from a follower device, and then begin the experiment:
+      <qrcode [qrdata]="toEncode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      <ion-button color="primary" expand="block" (click)="beginMaster()" >Begin Experiment</ion-button>
+    </div>
+  </div>
+  <div *ngIf="!leader" class="ion-padding">
+    <ion-item>
+      <p>
+        Define an experiment on another device, and then click "Next". Scan the barcode that is presented on the next screen.
+      </p>
+    </ion-item>
+    <ion-button color="primary" expand="block" type="submit" (click)="scanExperiment()">Next</ion-button>
+  </div>
+  
+</ion-content>

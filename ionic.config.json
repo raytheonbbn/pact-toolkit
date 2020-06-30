@@ -1,0 +1,7 @@
+{
+  "name": "pact-toolkit-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
