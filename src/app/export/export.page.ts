@@ -63,7 +63,7 @@ export class ExportPage implements OnInit {
   
       }else if(this.exportOptions.target == "email_pact"){
         //download and attach to email with preconfigured message
-        this.shareToEmail("pact-data@example.org");
+        this.shareToEmail("pactdatasets@gmail.com");
   
       }else if(this.exportOptions.target == "email_custom"){
         //download and attach to email no dest
